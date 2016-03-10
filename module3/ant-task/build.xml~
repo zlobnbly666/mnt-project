@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+  <project name="Test project" default="dist" basedir=".">
+ 
+   <property name="dist" location="dist"/>
+    <property name="src" location="src"/>
+     <property name="build" location="build"/>
+      <property name="config" location="config"/>
+       <property name="lib" location="lib"/>
+        <property name="temp" location="temp"/>
+         <property name="test" location="test"/>
+          <property name="jar" location="jar"/>
+
+  <target name="init">
+   <echo>Initialize</echo> 
+    <tstamp>
+     <format property="time.stamp" pattern="EEE, d MMM yyyy HH:mm:ss"/>
+    </tstamp>
+       <mkdir dir="${build}"/>
+        <path id="build.classpath">
+        <fileset dir="${lib}">
+      <include name="**/*.jar"/>
+      </fileset>
+    </path> 
+  </target>
+
+  <target name="clean" depends="init">
+      <echo>Cleaning folders</echo>
+       <delete dir="${dist}" />
+        <delete dir="${build}" />
+         <delete dir="${jar}" />
+          <delete dir="${temp}" />
+  </target>
+
+  <target name="compile" depends="init">
+     <echo>Compiling</echo>
+      <javac srcdir="${src}/com/test/" destdir="${build}" classpathref="build.classpath"/>
+  </target> 
+
+  <target name="test" depends="compile">
+   <echo>Running test</echo>
+    <javac includeantruntime="false" srcdir="${test}" destdir="${test}">
+     <classpath location="${lib}/junit-4.11.jar"/>
+     </javac>
+   <junit printsummary="on">
+    <classpath location="${lib}/junit-4.11.jar"/>
+    <classpath location="${lib}/hamcrest-core-1.3.jar"/>
+    <test name="${test}/com/test/UnitTest"/>
+   </junit>
+  </target>
+
+
+  <target name="jar" depends="test">
+    <echo>Create jar file</echo>
+     <mkdir dir="${jar}"/>
+     <jar destfile="${jar}/testproject.jar" basedir="${build}"/>
+  </target>
+
+    <target name="dist" depends="jar">
+     <mkdir dir="${dist}" />
+      <mkdir dir="${temp}" />
+	<copy file="${jar}/testproject.jar" todir="${temp}"/>
+	 <copy todir="${temp}">
+	<fileset dir="${lib}"></fileset>
+	</copy>
+
+	<copy file="${config}/project.properties" todir="${temp}"/>
+	<zip destfile="${dist}/${time.stamp}_testproject.zip"
+	basedir="${temp}"
+	update="true"
+	/>
+     </target>
+ 
+</project> 
