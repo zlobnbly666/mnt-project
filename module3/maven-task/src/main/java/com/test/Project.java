@@ -1,16 +1,16 @@
 package com.test;
-#absbsbsbsbsbsbsbsbsbsbsbsbbs
+//absbsbsbsbsbsbsbsbsbsbsbsbbs
 //dependency on Apache commons-collections
 import org.apache.commons.collections.Predicate;
-#absbsbsbsbsbsbsbsbsbsbsbsbbs
+//absbsbsbsbsbsbsbsbsbsbsbsbbs
 class Project {
-#absbsbsbsbsbsbsbsbsbsbsbsbbs
+//absbsbsbsbsbsbsbsbsbsbsbsbbs
   public static void test() {
     System.out.println("test");
   }
-  #absbsbsbsbsbsbsbsbsbsbsbsbbs
+  //absbsbsbsbsbsbsbsbsbsbsbsbbs
   public static void main(String[] args) {
     System.out.println("Hellow MTN");
   }
-#absbsbsbsbsbsbsbsbsbsbsbsbbs
+//absbsbsbsbsbsbsbsbsbsbsbsbbs
 }
